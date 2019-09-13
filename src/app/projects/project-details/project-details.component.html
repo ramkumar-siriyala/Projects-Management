@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Project Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+      <ion-card-title>{{projectDetails?.projectName}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{projectDetails?.projectDescr}}
+    </ion-card-content>
+  </ion-card>
+  <ion-row>
+    <ion-col>
+      <ion-button text-lowercase size="small" (click)="createModule()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Create Module
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-card *ngFor="let module of modules; let i = index">
+    <ion-item (click)="toggleAccordion(i,module)">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <!-- <ion-icon name="walk" slot="start"></ion-icon> -->
+      <ion-label>{{module.moduleName}}</ion-label>
+      <ion-label>{{module.moduleDescr}}</ion-label>
+      <!-- <ion-button fill="outline" size="small" slot="end">View</ion-button>
+      <ion-button fill="outline" size="small"  slot="end">Delete</ion-button> -->
+      <ion-button slot="end">
+        <ion-icon  slot="icon-only" [name]="((selectedModuleIndex==i) && isAccOpen) ? 'arrow-dropdown': 'arrow-dropup' "></ion-icon>
+        <!-- <ion-icon *ngIf="(selectedModuleIndex !=i && !isAccOpen)" slot="icon-only" name="arrow-dropup"></ion-icon> -->
+      </ion-button>
+    </ion-item>
+    <div *ngIf="(selectedModuleIndex==i)" [ngClass]="isAccOpen ? 'active' : 'inactive'">
+      <p>{{ description }}</p>
+      <ion-button type="button" text-lowercase size="small" color="primary" fill="solid" (click)="createSubModule(module)">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Create Sub Module
+      </ion-button>
+      <ion-item *ngFor="let subModule of subModules">
+        <ion-avatar slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <!-- <ion-icon name="walk" slot="start"></ion-icon> -->
+        <ion-label>{{subModule.subModuleName}}</ion-label>
+        <ion-label>{{subModule.subModuleDescr}}</ion-label>
+        <!-- <ion-button fill="outline" size="small" slot="end">View</ion-button>
+          <ion-button fill="outline" size="small"  slot="end">Delete</ion-button> -->
+
+      </ion-item>
+    </div>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"  ></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text color="light" class="fw700">Projects Management</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+                <!-- (click)="notifications()" -->
+            <ion-button size="small" shape="round" color="medium" >
+                <ion-icon name="notifications"></ion-icon>
+                <ion-badge color="dark" slot="end">2</ion-badge>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar color="dark">
+            <!-- [(ngModel)]="searchKey" -->
+        <ion-searchbar ></ion-searchbar>
+        <ion-buttons slot="end">
+                <!-- (click)="searchFilter()" -->
+            <ion-button size="small" shape="round" color="medium" >
+                <ion-icon name="options"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-row>
+        <ion-col>
+            <ion-button text-lowercase size="small" (click)="createProject()">
+                <ion-icon slot="start" name="add"></ion-icon>
+                Create Project
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-card *ngFor="let project of projects">
+        <ion-item>
+            <ion-avatar slot="start">
+                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-avatar>
+            <!-- <ion-icon name="walk" slot="start"></ion-icon> -->
+            <ion-label>{{project.projectName}}</ion-label>
+            <ion-label>{{project.projectDescr}}</ion-label>
+            <ion-button fill="outline" size="small" (click)="getProjectDetails(project)" slot="end">View</ion-button>
+            <ion-button fill="outline" size="small" (click)="deleteProject(project.id)" slot="end">Delete</ion-button>
+        </ion-item>
+    </ion-card>
+</ion-content>
+<!-- <p>create-project works! isLogin {{globalService.isLogin}}</p> -->
